@@ -1,0 +1,37 @@
+.root-week-wrap{
+    display: flex;
+    justify-content: center;
+}
+
+.week-wrap{
+    margin: 5px;
+    padding: 5px;
+    width: 70%;
+}
+.week-header-contain{
+    margin: 5px 5px 10px 5px;
+    padding: 5px;
+}
+.week-header-text{
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+.week-header-data{
+    font-size: 18px;
+}
+
+.week-block-contain{
+    display: flex;
+    justify-content: flex-start;
+    padding: 5px 80px;
+}
+.week-block{
+    margin: 5px;
+    padding: 10px 5px 5px;
+    width: 150px;
+    height: 150px;
+    border: 1px solid #b4b4b4;
+}
+.week-item{
+    margin-bottom: 5px;
+}

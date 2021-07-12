@@ -1,0 +1,36 @@
+.root-bannerWeather-wrap{
+    border-bottom: 1px solid grey;
+}
+.bannerWeather-wrap{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    position: relative;
+}
+.bannerWeather-block-weather{
+    font-size: 50px;
+    margin: 15px;
+    padding: 5px;
+}
+.bannerWeather-info-degrees{
+}
+.bannerWeather-info-city{
+    font-size: 2rem;
+}
+.bannerWeather-info-sky,
+.bannerWeather-info-wind{
+    font-size: 1.1rem;
+}
+.bannerWeather-button-save{
+    position: absolute;
+    right: 5px;
+}
+.bannerWeather-button-save:hover{
+    cursor: pointer;
+}
+.MuiSvgIcon-root{
+  font-size: 40px!important;
+}

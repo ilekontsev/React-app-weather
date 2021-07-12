@@ -1,0 +1,30 @@
+.root-saveCity-wrap{
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid grey;
+}
+
+.saveCity-wrap{
+    margin: 5px;
+    padding: 5px;
+    width: 1280px;
+}
+.saveCity-header-text{
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 5px 5px 10px 5px;
+    padding: 5px;
+}
+.saveCity-contain-block{
+    display: flex;
+    justify-content: flex-start;
+}
+.saveCity-block{
+    margin: 5px;
+    padding: 10px 5px 5px;
+    width: 150px;
+    height: 150px;
+    text-align: center;
+    border: 1px solid #b4b4b4;
+}

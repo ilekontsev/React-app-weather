@@ -1,0 +1,25 @@
+.root-header-wrap{
+    border-bottom: 1px solid grey;
+}
+
+.header-wrap{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 55px;
+    padding: 10px;
+}
+
+.header-list-cont{
+    display: flex;
+    list-style: none;
+}
+.item{
+    margin: 5px;
+    padding: 5px;
+    transition: 0.2s;
+}
+.item:hover{
+    cursor: pointer;
+    background: rgba(211, 211, 211, 0.75);
+}
