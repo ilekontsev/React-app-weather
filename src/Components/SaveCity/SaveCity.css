@@ -1,13 +1,12 @@
 .root-saveCity-wrap{
     display: flex;
     justify-content: center;
-    border-bottom: 1px solid grey;
 }
 
 .saveCity-wrap{
     margin: 5px;
     padding: 5px;
-    width: 1280px;
+    width: 70%;
 }
 .saveCity-header-text{
     text-align: center;
@@ -16,12 +15,14 @@
     margin: 5px 5px 10px 5px;
     padding: 5px;
 }
-.saveCity-contain-block{
+.saveCity-block-contain{
     display: flex;
     justify-content: flex-start;
+    flex-wrap: wrap;
 }
+
 .saveCity-block{
-    margin: 5px;
+    margin: 10px 30px;
     padding: 10px 5px 5px;
     width: 150px;
     height: 150px;

@@ -3,7 +3,7 @@
 }
 .bannerWeather-wrap{
     width: 100%;
-    height: 100%;
+    height: 240px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,6 +23,7 @@
 .bannerWeather-info-sky,
 .bannerWeather-info-wind{
     font-size: 1.1rem;
+    margin-top: 5px;
 }
 .bannerWeather-button-save{
     position: absolute;
