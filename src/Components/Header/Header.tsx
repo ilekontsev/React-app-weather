@@ -3,11 +3,14 @@ import "./Header.css";
 import InputSearch from "../InputSearch/InputSearch";
 import { useHistory } from "react-router-dom";
 import { actionSetFlagDay } from "../../Store/Action";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { selectorCheckFlagDay } from "../../Store/Selector";
 
 function Header() {
   const history = useHistory();
   const dispatch = useDispatch();
+  // @ts-ignore
+  const checkFlagDay: string = useSelector(selectorCheckFlagDay);
 
   useEffect(() => {
     dispatch(actionSetFlagDay(history.location.pathname));
@@ -16,21 +19,38 @@ function Header() {
     dispatch(actionSetFlagDay("/" + e.target.id));
     history.push("/" + e?.target?.id);
   };
+
   return (
     <div className="root-header-wrap">
       <div className="header-wrap">
-        <nav>
+        <nav className={"header-nav"}>
           <ul className={"header-list-cont"}>
-            <li className={"item"} onClick={handleClickHome}>
+            <li
+              // @ts-ignore
+              className={checkFlagDay === "/" ? "borderItem" : "item"}
+              onClick={handleClickHome}
+            >
               Home
             </li>
-            <li className={"item"} id={"today"} onClick={handleClickHome}>
+            <li
+              className={checkFlagDay === "/today" ? "borderItem" : "item"}
+              id={"today"}
+              onClick={handleClickHome}
+            >
               Today
             </li>
-            <li className={"item"} id={"tomorrow"} onClick={handleClickHome}>
+            <li
+              className={checkFlagDay === "/tomorrow" ? "borderItem" : "item"}
+              id={"tomorrow"}
+              onClick={handleClickHome}
+            >
               Tomorrow
             </li>
-            <li className={"item"} id={"week"} onClick={handleClickHome}>
+            <li
+              className={checkFlagDay === "/week" ? "borderItem" : "item"}
+              id={"week"}
+              onClick={handleClickHome}
+            >
               Week
             </li>
           </ul>

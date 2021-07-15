@@ -1,7 +1,10 @@
 import {
   CHECK_FLAG_DAY,
   HOURLY_WEATHER,
+  LAT_AND_LONG,
   SAVED_CITIES,
+  SEARCH_VARIANT,
+  TEXT_SEARCH_INPUT,
   WEATHER_NOW,
   WEEK_WEATHER,
 } from "./ActionType";
@@ -12,7 +15,6 @@ export interface DescState {
   };
   todayHourlyWeather: object[];
   tomorrowHourlyWeather: object[];
-  flagCallReq: boolean;
   checkFlagDay: string;
   savedCities: [
     {
@@ -20,34 +22,45 @@ export interface DescState {
     }
   ];
   weekWeather: object[];
+  textSearchInput: string;
+  searchVariants: object[];
+  lat: string;
+  long: string;
 }
 
 const initialState = {
   weatherNow: {},
   todayHourlyWeather: [],
   tomorrowHourlyWeather: [],
-  flagCallReq: true,
-  checkFlagDay: "",
+  checkFlagDay: "/",
   savedCities: [],
   weekWeather: [],
+  textSearchInput: "",
+  searchVariants: [],
+  lat: "",
+  long: "",
 };
-
-export const apiKey = "bde2be77470117360e4aad4463a99029";
-export const url = "https://api.openweathermap.org/data/2.5";
 
 function reducer(state = initialState, action: any) {
   switch (action.type) {
+    case LAT_AND_LONG:
+      return {
+        ...state,
+        lat: action.payload.lat,
+        long: action.payload.long,
+      };
     case WEATHER_NOW:
       return {
         ...state,
         weatherNow: action.payload.weatherNow,
+        textSearchInput: "",
+        searchVariants: [],
       };
     case HOURLY_WEATHER:
       return {
         ...state,
         todayHourlyWeather: action.payload.todayHourlyWeather,
         tomorrowHourlyWeather: action.payload.tomorrowHourlyWeather,
-        flagCallReq: false,
       };
     case CHECK_FLAG_DAY:
       return {
@@ -55,25 +68,25 @@ function reducer(state = initialState, action: any) {
         checkFlagDay: action.payload.checkFlagDay,
       };
     case SAVED_CITIES:
-      // eslint-disable-next-line no-case-declarations
-      const checkedMatch = state.savedCities.some(
-        // @ts-ignore
-        (item) => item?.name === state.weatherNow?.name
-      );
-      if (!checkedMatch) {
-        return {
-          ...state,
-          // @ts-ignore
-          savedCities: state.savedCities.concat(state.weatherNow),
-        };
-      }
       return {
         ...state,
+        // @ts-ignore
+        savedCities: state.savedCities.concat(action.payload.upd),
       };
     case WEEK_WEATHER:
       return {
         ...state,
         weekWeather: action.payload.weekWeather,
+      };
+    case TEXT_SEARCH_INPUT:
+      return {
+        ...state,
+        textSearchInput: action.payload.textSearchInput,
+      };
+    case SEARCH_VARIANT:
+      return {
+        ...state,
+        searchVariants: action.payload.variant,
       };
   }
 }

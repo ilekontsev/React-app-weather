@@ -1,10 +1,11 @@
 import axios from "axios";
 import {
+  actionSearchOfferVariant,
   actionSetHourlyWeather,
   actionSetWeather,
   actionSetWeekWeather,
 } from "./Action";
-import { apiKey, url } from "./Reducer";
+import { API_KEY, TOKEN_FOR_MAP_BOX, URL, URL_MAP_BOX } from "../Config/Config";
 
 interface DescResWeather {
   data: {
@@ -12,20 +13,17 @@ interface DescResWeather {
   };
 }
 
-const lat = localStorage.getItem("latitude");
-const long = localStorage.getItem("longitude");
-
-const effectGetWeather = () => async (dispatch: any) => {
-  try {
-    const res: DescResWeather = await axios.get(
-      `${url}/weather?lat=${lat}&lon=${long}&units=metric&appid=${apiKey}`
-    );
-
-    dispatch(actionSetWeather(res.data));
-  } catch (err) {
-    console.log(err);
-  }
-};
+const effectGetWeather =
+  (lat1: string, long1: string) => async (dispatch: any) => {
+    try {
+      const res: DescResWeather = await axios.get(
+        `${URL}/weather?lat=${lat1}&lon=${long1}&units=metric&appid=${API_KEY}`
+      );
+      dispatch(actionSetWeather(res.data));
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
 function getWeekDay(date: any) {
   const days = [
@@ -72,40 +70,58 @@ const getDate = (data: object[], dayDate: any, day: string = "") => {
   });
 };
 
-const effectGetHourlyWeather = () => async (dispatch: any) => {
+const effectGetHourlyWeather =
+  (lat1: string, long1: string) => async (dispatch: any) => {
+    try {
+      const res: any = await axios.get(
+        `${URL}/forecast?lat=${lat1}&lon=${long1}&cnt=16&units=metric&appid=${API_KEY}`
+      );
+      const data = res.data.list;
+      const today = new Date();
+      const tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000);
+      const todayWeather = getDate(data, today, "Today");
+      const tomorrowWeather = getDate(data, tomorrow, "Tomorrow");
+      dispatch(actionSetHourlyWeather(todayWeather, tomorrowWeather));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+const effectGetWeekWeather =
+  (lat1: string, long1: string) => async (dispatch: any) => {
+    try {
+      const exclude: string = "exclude=minutely,hourly,current,alerts";
+      const res: any = await axios.get(
+        `${URL}/onecall?lat=${lat1}&lon=${long1}&${exclude}&units=metric&appid=${API_KEY}`
+      );
+      const data = res.data.daily;
+      const daily = data.map((item: any) => {
+        const dataItem = new Date(item.dt * 1000);
+        item.myDay = getWeekDay(dataItem);
+        item.myMonth = getMonthYear(dataItem);
+        item.myNumber = dataItem.getDate();
+        return item;
+      });
+      dispatch(actionSetWeekWeather(daily));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+const effectGetWeatherCity = (value: string) => async (dispatch: any) => {
   try {
     const res: any = await axios.get(
-      `${url}/forecast?lat=${lat}&lon=${long}&cnt=16&units=metric&appid=${apiKey}`
+      `${URL_MAP_BOX}/${value}.json?types=place&limit=6&access_token=${TOKEN_FOR_MAP_BOX}`
     );
-    const data = res.data.list;
-    const today = new Date();
-    const tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000);
-    const todayWeather = getDate(data, today, "Today");
-    const tomorrowWeather = getDate(data, tomorrow, "Tomorrow");
-    dispatch(actionSetHourlyWeather(todayWeather, tomorrowWeather));
+    dispatch(actionSearchOfferVariant(res.data.features));
   } catch (err) {
     console.log(err);
   }
 };
 
-const effectGetWeekWeather = () => async (dispatch: any) => {
-  try {
-    const exclude: string = "exclude=minutely,hourly,current,alerts";
-    const res: any = await axios.get(
-      `${url}/onecall?lat=${lat}&lon=${long}&${exclude}&units=metric&appid=${apiKey}`
-    );
-    const data = res.data.daily;
-    const daily = data.map((item: any) => {
-      const dataItem = new Date(item.dt * 1000);
-      item.myDay = getWeekDay(dataItem);
-      item.myMonth = getMonthYear(dataItem);
-      item.myNumber = dataItem.getDate();
-      return item;
-    });
-    dispatch(actionSetWeekWeather(daily));
-  } catch (err) {
-    console.log(err);
-  }
+export {
+  effectGetWeather,
+  effectGetHourlyWeather,
+  effectGetWeekWeather,
+  effectGetWeatherCity,
 };
-
-export { effectGetWeather, effectGetHourlyWeather, effectGetWeekWeather };

@@ -1,20 +1,46 @@
 import React from "react";
 import "./SaveCity.css";
-import { useSelector } from "react-redux";
-import { selectorSavedCities } from "../../Store/Selector";
+import { useDispatch, useSelector } from "react-redux";
+import { selectorSavedCities, selectorWeatherNow } from "../../Store/Selector";
+import InputSearch from "../InputSearch/InputSearch";
+import {
+  effectGetHourlyWeather,
+  effectGetWeather,
+  effectGetWeekWeather,
+} from "../../Store/Effects";
+import { DescWeatherNow } from "../BannerWeather/BannerWeather";
 
 interface DescSavedCities {
   name: string;
-  sys: {
-    country: string;
+  country: string;
+  coord: {
+    lon: string;
+    lat: string;
   };
 }
 
 function SaveCity() {
+  const dispatch = useDispatch();
   // @ts-ignore
   const savedCities: DescSavedCities[] = useSelector(selectorSavedCities);
+  // @ts-ignore
+  const weatherNow: DescWeatherNow = useSelector(selectorWeatherNow);
   const displayingThisCity = (e: any) => {
-    console.log(e);
+    const nameCity = e.target.innerText.split(",")[0];
+    if (weatherNow.name !== nameCity) {
+      // eslint-disable-next-line array-callback-return
+      const findCity = savedCities.filter((item) => {
+        if (item.name === nameCity) {
+          return item;
+        }
+      });
+      const { lon, lat } = findCity[0].coord;
+      localStorage.setItem("latitude", lat);
+      localStorage.setItem("longitude", lon);
+      dispatch(effectGetWeather(lat, lon));
+      dispatch(effectGetHourlyWeather(lat, lon));
+      dispatch(effectGetWeekWeather(lat, lon));
+    }
   };
   return (
     <>
@@ -30,7 +56,7 @@ function SaveCity() {
                   onClick={displayingThisCity}
                 >
                   <p>
-                    {item.name}, {item.sys.country}
+                    {item?.name}, {item?.country}
                   </p>
                 </div>
               ))}

@@ -1,7 +1,10 @@
 import {
   CHECK_FLAG_DAY,
   HOURLY_WEATHER,
+  LAT_AND_LONG,
   SAVED_CITIES,
+  SEARCH_VARIANT,
+  TEXT_SEARCH_INPUT,
   WEATHER_NOW,
   WEEK_WEATHER,
 } from "./ActionType";
@@ -11,6 +14,16 @@ const actionSetWeather = (weatherNow: object) => {
     type: WEATHER_NOW,
     payload: {
       weatherNow,
+    },
+  };
+};
+
+const actionSetLatAndLong = (lat: string, long: string) => {
+  return {
+    type: LAT_AND_LONG,
+    payload: {
+      lat,
+      long,
     },
   };
 };
@@ -37,9 +50,12 @@ const actionSetFlagDay = (checkFlagDay: string) => {
   };
 };
 
-const actionSetPreservedCity = () => {
+const actionSetPreservedCity = (upd: object[]) => {
   return {
     type: SAVED_CITIES,
+    payload: {
+      upd,
+    },
   };
 };
 
@@ -52,10 +68,30 @@ const actionSetWeekWeather = (weekWeather: object[]) => {
   };
 };
 
+const actionSetTextSearchInput = (textSearchInput: string) => {
+  return {
+    type: TEXT_SEARCH_INPUT,
+    payload: {
+      textSearchInput,
+    },
+  };
+};
+
+const actionSearchOfferVariant = (variant: object[]) => {
+  return {
+    type: SEARCH_VARIANT,
+    payload: {
+      variant,
+    },
+  };
+};
 export {
   actionSetWeather,
   actionSetFlagDay,
   actionSetPreservedCity,
   actionSetHourlyWeather,
   actionSetWeekWeather,
+  actionSetTextSearchInput,
+  actionSearchOfferVariant,
+  actionSetLatAndLong,
 };

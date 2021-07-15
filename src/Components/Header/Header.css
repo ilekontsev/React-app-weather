@@ -7,19 +7,33 @@
     justify-content: space-between;
     align-items: center;
     height: 55px;
-    padding: 10px;
+    padding: 0 10px;
+}
+.header-nav{
+    height: 100%;
 }
 
 .header-list-cont{
     display: flex;
     list-style: none;
+    height: 100%;
 }
 .item{
-    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 5px;
-    transition: 0.2s;
+    margin-left: 5px;
 }
 .item:hover{
     cursor: pointer;
-    background: rgba(211, 211, 211, 0.75);
+    background: rgba(211, 211, 211, 0.57);
+}
+.borderItem{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    background: rgba(150, 147, 147, 0.75);
+    color: #fafafa;
 }

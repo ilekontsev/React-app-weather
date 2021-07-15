@@ -4,15 +4,21 @@ import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import { effectGetWeather } from "../../Store/Effects";
 import { useDispatch, useSelector } from "react-redux";
 import { selectorSavedCities, selectorWeatherNow } from "../../Store/Selector";
-import { useHistory } from "react-router-dom";
-import { actionSetPreservedCity } from "../../Store/Action";
+import {
+  actionSetLatAndLong,
+  actionSetPreservedCity,
+} from "../../Store/Action";
 
-interface DescWeatherNow {
+export interface DescWeatherNow {
   weather: [
     {
       main: string;
     }
   ];
+  coord: {
+    lon: string;
+    lat: string;
+  };
   main: {
     temp: number;
   };
@@ -35,15 +41,15 @@ function BannerWeather() {
   const dispatch = useDispatch();
   // @ts-ignore
   const weatherNow: DescWeatherNow = useSelector(selectorWeatherNow);
-
+  // @ts-ignore
+  const savedCities: DescWeatherNow[] = useSelector(selectorSavedCities);
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position: DescPosition) => {
         const lat = position.coords.latitude;
         const long = position.coords.longitude;
-        localStorage.setItem("latitude", String(lat));
-        localStorage.setItem("longitude", String(long));
-        dispatch(effectGetWeather());
+        dispatch(actionSetLatAndLong(String(lat), String(long)));
+        dispatch(effectGetWeather(String(lat), String(long)));
       },
       (err) => {
         console.log(err);
@@ -51,8 +57,34 @@ function BannerWeather() {
     );
   }, []);
 
-  const saveCity = () => {
-    dispatch(actionSetPreservedCity());
+  const saveCityInLocal = (upd: object) => {
+    const getCities = localStorage.getItem("cities");
+    if (getCities !== null) {
+      const citiesParse = JSON.parse(getCities);
+      console.log(citiesParse);
+      const citiesArr = citiesParse.concat(upd);
+      const cities = JSON.stringify(citiesArr);
+      localStorage.setItem("cities", cities);
+    } else {
+      const cities = JSON.stringify([upd]);
+      localStorage.setItem("cities", cities);
+    }
+  };
+
+  const saveCity = async () => {
+    const checkedMatch = savedCities.some(
+      // @ts-ignore
+      (item) => item?.name === weatherNow?.name
+    );
+    if (!checkedMatch) {
+      const upd = {
+        name: weatherNow.name,
+        country: weatherNow.sys.country,
+        coord: weatherNow.coord,
+      };
+      await dispatch(actionSetPreservedCity([upd]));
+      saveCityInLocal(upd);
+    }
   };
   return (
     <div className="root-bannerWeather-wrap">
@@ -70,7 +102,7 @@ function BannerWeather() {
                 {weatherNow.weather[0].main}
               </p>
               <p className="bannerWeather-info-wind">
-                Wind - {weatherNow.wind.speed} per second
+                Wind - {weatherNow.wind.speed} meters per second
               </p>
             </>
           )}

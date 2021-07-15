@@ -1,3 +1,6 @@
+.root-input-wrap{
+    position: relative;
+}
 .input-search-wrap{
     width: 250px;
     height: 35px;
@@ -5,4 +8,21 @@
     border: 1px solid grey;
     outline: none;
     padding: 2px 5px 2px 10px;
+}
+.visible-class{
+    border: 1px solid grey;
+    position: absolute;
+    background: white;
+    padding: 5px;
+    z-index: 200;
+}
+.hidden-class{
+    visibility: hidden;
+}
+.item-search{
+    margin-bottom: 2px;
+}
+.item-search:hover{
+    background: grey;
+    color: white;
 }
