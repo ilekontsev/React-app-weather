@@ -12,7 +12,7 @@ import {
   actionSetPreservedCity,
 } from "../../Store/Action";
 
-function App() {
+const App = (props: any) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -42,6 +42,6 @@ function App() {
       </div>
     </BrowserRouter>
   );
-}
+};
 
 export default App;

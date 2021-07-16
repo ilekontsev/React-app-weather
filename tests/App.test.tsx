@@ -1,18 +1,29 @@
 import React from "react";
+import App from "../src/Components/App/App";
 
-import { configure, shallow } from "enzyme";
-import Adapter from "enzyme-adapter-react-15";
+import { Provider } from "react-redux";
+import store from "../src/Store/Store";
+import ReactDOM from "react-dom";
 
-configure({ adapter: new Adapter() });
+describe(">>>APP", () => {
+  let container: HTMLDivElement;
+  // eslint-disable-next-line prefer-const
+  container = document.createElement("div");
 
-describe(">>>APP --- Snapshot", () => {
-  test(" Snapshot of App", () => {
-    const wrap = shallow(
-        <Provider store={store}>
-          <App />
-        </Provider>
+  afterEach(() => {
+    document.body.removeChild(container);
+    container.remove();
+  });
+
+  test("Check render class", () => {
+    document.body.appendChild(container);
+    ReactDOM.render(
+      <Provider store={store}>
+        <App />
+      </Provider>,
+      container
     );
-    console.log("wdadwa", wrap);
-    expect(wrap.find(".root-wrap")).toHaveLength(0);
+    const findClass = document.querySelectorAll(".root-wrap-app");
+    expect(findClass).toHaveLength(1);
   });
 });

@@ -10,8 +10,8 @@ const config: Config.InitialOptions = {
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
   testEnvironment: "jsdom",
   moduleNameMapper: {
-    "\\.(jpg)$": "<rootDir>/test/mockFile.ts",
-    "\\.(css)$": "<rootDir>/test/mockFile.ts",
+    "\\.(jpg)$": "<rootDir>/tests/mockFile.ts",
+    "\\.(css)$": "<rootDir>/tests/mockFile.ts",
   },
   collectCoverage: true,
   collectCoverageFrom: [

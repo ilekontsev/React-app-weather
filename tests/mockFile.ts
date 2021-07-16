@@ -1,1 +1,2 @@
-export {}
+// @ts-ignore
+export {};
