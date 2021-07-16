@@ -61,7 +61,6 @@ const getDate = (data: object[], dayDate: any, day: string = "") => {
     const dateItem = new Date(item.dt * 1000);
     if (dayDate.getDate() === dateItem.getDate()) {
       item.myTime = String(dateItem).substr(16, 5);
-      // eslint-disable-next-line @typescript-eslint/no-use-before-define
       item.myMonth = getMonthYear(dateItem);
       item.myNumber = dateItem.getDate();
       item.myDay = day;

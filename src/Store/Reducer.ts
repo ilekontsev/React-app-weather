@@ -70,7 +70,6 @@ function reducer(state = initialState, action: any) {
     case SAVED_CITIES:
       return {
         ...state,
-        // @ts-ignore
         savedCities: state.savedCities.concat(action.payload.upd),
       };
     case WEEK_WEATHER:

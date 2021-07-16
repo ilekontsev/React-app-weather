@@ -5,6 +5,7 @@ import "./index.css";
 import { Provider } from "react-redux";
 import store from "./Store/Store";
 
+/* istanbul ignore file */
 ReactDOM.render(
   <Provider store={store}>
     <App />

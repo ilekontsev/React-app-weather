@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./WeekWeather.css";
 import { useDispatch, useSelector } from "react-redux";
 import { effectGetWeekWeather } from "../../Store/Effects";
@@ -25,9 +25,7 @@ interface DescWeek {
 
 function WeekWeather() {
   const dispatch = useDispatch();
-  // @ts-ignore
   const lat: string = useSelector(selectorLat);
-  // @ts-ignore
   const long: string = useSelector(selectorLong);
   //  @ts-ignore
   const weekWeather: DescWeek[] = useSelector(selectorWeekWeather);

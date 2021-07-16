@@ -1,7 +1,10 @@
-import React, { useCallback } from "react";
+import React, { ChangeEvent, useCallback } from "react";
 
 import "./InputSearch.css";
-import { actionSetTextSearchInput } from "../../Store/Action";
+import {
+  actionSetLatAndLong,
+  actionSetTextSearchInput,
+} from "../../Store/Action";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectorSearchVariants,
@@ -16,11 +19,9 @@ import {
 const debounce = require("lodash.debounce");
 
 function InputSearch() {
-  // @ts-ignore
-  const textSearchInput: string = useSelector(selectorTextSearchInput);
-  // @ts-ignore
-  const searchVariants: object[] = useSelector(selectorSearchVariants);
   const dispatch = useDispatch();
+  const textSearchInput: string = useSelector(selectorTextSearchInput);
+  const searchVariants: object[] = useSelector(selectorSearchVariants);
 
   const reqSearch = (valueText: string) => {
     dispatch(effectGetWeatherCity(valueText));
@@ -30,7 +31,7 @@ function InputSearch() {
     [debounce]
   );
 
-  const writeInput = (e: any) => {
+  const writeInput = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(actionSetTextSearchInput(e.target.value));
     debouncedSave(e.target.value);
   };
@@ -40,6 +41,7 @@ function InputSearch() {
   };
   const selectItem = (geometry: string[]) => {
     const [long, lat] = geometry;
+    dispatch(actionSetLatAndLong(lat, long));
     dispatch(effectGetWeather(lat, long));
     dispatch(effectGetHourlyWeather(lat, long));
     dispatch(effectGetWeekWeather(lat, long));

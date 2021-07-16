@@ -1,30 +1,24 @@
 import { DescState } from "./Reducer";
 
-const selectorWeatherNow: object = (state: DescState) => state?.weatherNow;
-const selectorTodayHourlyWeather: object | undefined = (state: DescState) =>
+const selectorWeatherNow = (state: DescState) => state?.weatherNow;
+const selectorTodayHourlyWeather = (state: DescState) =>
   state?.todayHourlyWeather;
-const selectorTomorrowHourlyWeather: object = (state: DescState) =>
+const selectorTomorrowHourlyWeather = (state: DescState) =>
   state?.tomorrowHourlyWeather;
-// @ts-ignore
-const selectorCheckFlagDay: string = (state: DescState) => state?.checkFlagDay;
-// @ts-ignore
-const selectorSavedCities: object[] = (state: DescState) => state?.savedCities;
-// @ts-ignore
-const selectorWeekWeather: object[] = (state: DescState) => state?.weekWeather;
 
-// @ts-ignore
-const selectorTextSearchInput: string = (state: DescState) =>
-  state?.textSearchInput;
+const selectorCheckFlagDay = (state: DescState) => state?.checkFlagDay;
 
-// @ts-ignore
-const selectorSearchVariants: object[] = (state: DescState) =>
-  state?.searchVariants;
+const selectorSavedCities = (state: DescState) => state?.savedCities;
 
-// @ts-ignore
-const selectorLat: string = (state: DescState) => state?.lat;
+const selectorWeekWeather = (state: DescState) => state?.weekWeather;
 
-// @ts-ignore
-const selectorLong: string = (state: DescState) => state?.long;
+const selectorTextSearchInput = (state: DescState) => state?.textSearchInput;
+
+const selectorSearchVariants = (state: DescState) => state?.searchVariants;
+
+const selectorLat = (state: DescState) => state?.lat;
+
+const selectorLong = (state: DescState) => state?.long;
 
 export {
   selectorWeatherNow,

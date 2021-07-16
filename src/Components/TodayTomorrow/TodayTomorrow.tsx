@@ -31,21 +31,18 @@ interface DescHourlyWeather {
 
 function TodayTomorrow() {
   const dispatch = useDispatch();
-  // @ts-ignore
   const lat: string = useSelector(selectorLat);
-  // @ts-ignore
   const long: string = useSelector(selectorLong);
+  const checkFlagDay: string = useSelector(selectorCheckFlagDay);
 
+  // @ts-ignore
   const todayHourlyWeather: DescHourlyWeather[] = useSelector(
-    // @ts-ignore
     selectorTodayHourlyWeather
   );
+  // @ts-ignore
   const tomorrowHourlyWeather: DescHourlyWeather[] = useSelector(
-    // @ts-ignore
     selectorTomorrowHourlyWeather
   );
-  // @ts-ignore
-  const checkFlagDay: string = useSelector(selectorCheckFlagDay);
 
   if (todayHourlyWeather?.length === 0) {
     dispatch(effectGetHourlyWeather(lat, long));

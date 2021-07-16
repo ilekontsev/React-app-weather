@@ -9,8 +9,6 @@ const asyncFunctionMiddleware = (storeAPI) => (next) => (action) => {
 };
 const middlewareEnhancer = applyMiddleware(asyncFunctionMiddleware);
 
-/* eslint-disable no-underscore-dangle */
-
 // @ts-ignore
 const store = createStore(reducer, middlewareEnhancer);
 export default store;
