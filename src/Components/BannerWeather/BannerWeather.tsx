@@ -107,7 +107,7 @@ function BannerWeather() {
           )}
         </div>
         <div className="bannerWeather-button-save">
-          <AddCircleOutlineIcon onClick={saveCity} />
+          <AddCircleOutlineIcon data-testid={"block-test"} onClick={saveCity} />
         </div>
       </div>
     </div>

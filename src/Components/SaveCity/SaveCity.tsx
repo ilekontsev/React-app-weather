@@ -29,7 +29,6 @@ function SaveCity() {
   const selectThisCity = (e: React.MouseEvent) => {
     const target = e.target as HTMLElement;
     const nameCity = target.innerText.split(",")[0];
-
     if (weatherNow.name !== nameCity) {
       // eslint-disable-next-line array-callback-return
       const findCity = savedCities.filter((item) => {
@@ -57,6 +56,7 @@ function SaveCity() {
               {savedCities.map((item, index) => (
                 <div
                   key={index}
+                  data-testid="block-test"
                   className="saveCity-block"
                   onClick={selectThisCity}
                 >

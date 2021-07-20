@@ -1,9 +1,10 @@
 import { DescState } from "./Reducer";
+import { DescHourlyWeather } from "../Components/TodayTomorrow/TodayTomorrow";
 
 const selectorWeatherNow = (state: DescState) => state?.weatherNow;
-const selectorTodayHourlyWeather = (state: DescState) =>
+const selectorTodayHourlyWeather = (state: DescState): DescHourlyWeather[] =>
   state?.todayHourlyWeather;
-const selectorTomorrowHourlyWeather = (state: DescState) =>
+const selectorTomorrowHourlyWeather = (state: DescState): DescHourlyWeather[] =>
   state?.tomorrowHourlyWeather;
 
 const selectorCheckFlagDay = (state: DescState) => state?.checkFlagDay;

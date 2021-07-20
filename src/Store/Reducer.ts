@@ -8,13 +8,14 @@ import {
   WEATHER_NOW,
   WEEK_WEATHER,
 } from "./ActionType";
+import { DescHourlyWeather } from "../Components/TodayTomorrow/TodayTomorrow";
 
 export interface DescState {
   weatherNow: {
     name: string;
   };
-  todayHourlyWeather: object[];
-  tomorrowHourlyWeather: object[];
+  todayHourlyWeather: DescHourlyWeather[];
+  tomorrowHourlyWeather: DescHourlyWeather[];
   checkFlagDay: string;
   savedCities: [
     {
@@ -28,7 +29,7 @@ export interface DescState {
   long: string;
 }
 
-const initialState = {
+export const initialState = {
   weatherNow: {},
   todayHourlyWeather: [],
   tomorrowHourlyWeather: [],

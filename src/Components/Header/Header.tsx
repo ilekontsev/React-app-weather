@@ -6,7 +6,7 @@ import { actionSetFlagDay } from "../../Store/Action";
 import { useDispatch, useSelector } from "react-redux";
 import { selectorCheckFlagDay } from "../../Store/Selector";
 
-function Header(props: any) {
+function Header() {
   const history = useHistory();
   const dispatch = useDispatch();
 

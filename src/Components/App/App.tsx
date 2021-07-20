@@ -12,7 +12,7 @@ import {
   actionSetPreservedCity,
 } from "../../Store/Action";
 
-const App = (props: any) => {
+const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,7 +30,11 @@ const App = (props: any) => {
   };
   return (
     <BrowserRouter>
-      <div className={"root-wrap-app"} onClick={hiddenSearch}>
+      <div
+        data-testid={"block-test-app"}
+        className={"root-wrap-app"}
+        onClick={hiddenSearch}
+      >
         <Header />
         <BannerWeather />
         <Switch>

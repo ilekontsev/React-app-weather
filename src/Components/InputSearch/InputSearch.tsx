@@ -35,10 +35,7 @@ function InputSearch() {
     dispatch(actionSetTextSearchInput(e.target.value));
     debouncedSave(e.target.value);
   };
-  const searchCity = (e: any) => {
-    // if (e.key === "Enter" && e.target.value.trim().length !== 0) {
-    // }
-  };
+
   const selectItem = (geometry: string[]) => {
     const [long, lat] = geometry;
     dispatch(actionSetLatAndLong(lat, long));
@@ -53,7 +50,6 @@ function InputSearch() {
         placeholder={"Find city..."}
         type={"text"}
         onChange={writeInput}
-        onKeyDown={searchCity}
         value={textSearchInput || ""}
       />
       <div
@@ -64,6 +60,7 @@ function InputSearch() {
         {searchVariants?.map((item: any, index) => (
           <div
             key={index}
+            data-testid={"block-test"}
             className={"item-search"}
             onClick={() => selectItem(item.center)}
           >
