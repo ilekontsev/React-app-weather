@@ -8,35 +8,7 @@ import {
   actionSetLatAndLong,
   actionSetPreservedCity,
 } from "../../Store/Action";
-
-export interface DescWeatherNow {
-  weather: [
-    {
-      main: string;
-    }
-  ];
-  coord: {
-    lon: string;
-    lat: string;
-  };
-  main: {
-    temp: number;
-  };
-  name: string | undefined;
-  sys: {
-    country: string;
-  };
-  wind: {
-    speed: number;
-  };
-}
-
-interface DescPosition {
-  coords: {
-    latitude: number;
-    longitude: number;
-  };
-}
+import { DescPosition, DescWeatherNow } from "../../interface/interface";
 
 function BannerWeather() {
   const dispatch = useDispatch();
@@ -107,7 +79,10 @@ function BannerWeather() {
           )}
         </div>
         <div className="bannerWeather-button-save">
-          <AddCircleOutlineIcon data-testid={"block-test"} onClick={saveCity} />
+          <AddCircleOutlineIcon
+            data-testid={"block-tests"}
+            onClick={saveCity}
+          />
         </div>
       </div>
     </div>

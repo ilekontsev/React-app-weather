@@ -44,7 +44,7 @@ describe("WeekWeather ", () => {
   test("check 1 render", () => {
     store.dispatch(actionSetLatAndLong("54", "21"));
   });
-  test("test on map", () => {
+  test("tests on map", () => {
     store.dispatch(actionSetWeekWeather(data));
   });
 });

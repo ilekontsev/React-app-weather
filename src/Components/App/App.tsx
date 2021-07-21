@@ -31,7 +31,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <div
-        data-testid={"block-test-app"}
+        data-testid={"block-tests-app"}
         className={"root-wrap-app"}
         onClick={hiddenSearch}
       >

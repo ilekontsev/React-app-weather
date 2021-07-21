@@ -10,24 +10,7 @@ import {
   selectorTomorrowHourlyWeather,
 } from "../../Store/Selector";
 import Ymap from "../Ymap/Ymap";
-
-export interface DescHourlyWeather {
-  main: {
-    temp: number;
-  };
-  myDay: string;
-  myTime: string;
-  myMonth: string;
-  myNumber: string;
-  weather: [
-    {
-      main: string;
-    }
-  ];
-  wind: {
-    speed: number;
-  };
-}
+import { DescHourlyWeather } from "../../interface/interface";
 
 function TodayTomorrow() {
   const dispatch = useDispatch();

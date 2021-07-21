@@ -5,8 +5,8 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import store from "../../src/Store/Store";
 import { BrowserRouter } from "react-router-dom";
 
-describe("test header", () => {
-  test("test route", () => {
+describe("tests header", () => {
+  test("tests route", () => {
     render(
       <Provider store={store}>
         <BrowserRouter>

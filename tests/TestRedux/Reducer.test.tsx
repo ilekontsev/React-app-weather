@@ -24,8 +24,8 @@ const initialState = {
   long: "",
 };
 
-describe("test reducer", () => {
-  test("test reducer 1", () => {
+describe("tests reducer", () => {
+  test("tests reducer 1", () => {
     // @ts-ignore
     const check = reducer(initialState, {
       type: WEATHER_NOW,
@@ -36,7 +36,7 @@ describe("test reducer", () => {
       weatherNow: [{}, {}],
     });
   });
-  test("test reducer 2", () => {
+  test("tests reducer 2", () => {
     // @ts-ignore
     const check = reducer(initialState, {
       type: HOURLY_WEATHER,
@@ -48,7 +48,7 @@ describe("test reducer", () => {
       tomorrowHourlyWeather: [{}],
     });
   });
-  test("test reducer 3", () => {
+  test("tests reducer 3", () => {
     // @ts-ignore
     const check = reducer(initialState, {
       type: CHECK_FLAG_DAY,
@@ -59,7 +59,7 @@ describe("test reducer", () => {
       checkFlagDay: "dwa",
     });
   });
-  test("test reducer 4", () => {
+  test("tests reducer 4", () => {
     // @ts-ignore
     const check = reducer(initialState, {
       type: SAVED_CITIES,
@@ -71,7 +71,7 @@ describe("test reducer", () => {
     });
   });
 
-  test("test reducer 5", () => {
+  test("tests reducer 5", () => {
     // @ts-ignore
     const check = reducer(initialState, {
       type: WEEK_WEATHER,
@@ -82,7 +82,7 @@ describe("test reducer", () => {
       weekWeather: [{}],
     });
   });
-  test("test reducer 6", () => {
+  test("tests reducer 6", () => {
     // @ts-ignore
     const check = reducer(initialState, {
       type: TEXT_SEARCH_INPUT,
@@ -93,7 +93,7 @@ describe("test reducer", () => {
       textSearchInput: "hello world",
     });
   });
-  test("test reducer 7", () => {
+  test("tests reducer 7", () => {
     // @ts-ignore
     const check = reducer(initialState, {
       type: SEARCH_VARIANT,
@@ -104,7 +104,7 @@ describe("test reducer", () => {
       searchVariants: ["hello world"],
     });
   });
-  test("test reducer 8", () => {
+  test("tests reducer 8", () => {
     // @ts-ignore
     const check = reducer(initialState, {
       type: LAT_AND_LONG,

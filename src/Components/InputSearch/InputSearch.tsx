@@ -60,7 +60,7 @@ function InputSearch() {
         {searchVariants?.map((item: any, index) => (
           <div
             key={index}
-            data-testid={"block-test"}
+            data-testid={"block-tests"}
             className={"item-search"}
             onClick={() => selectItem(item.center)}
           >

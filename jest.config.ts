@@ -5,8 +5,10 @@ const config: Config.InitialOptions = {
   transform: {
     "^.+\\.(ts|tsx)?$": "ts-jest",
   },
+  verbose: true,
   setupFilesAfterEnv: ["@testing-library/jest-dom/extend-expect"],
-  testRegex: "(/tests/.*|(\\.|/)(test|spec))\\.tsx?$",
+  transformIgnorePatterns: ["node_modules/(?!variables/.*)"],
+  testRegex: "(/tests/.*|(\\.|/)(tests|spec))\\.tsx?$",
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
   testEnvironment: "jsdom",
   moduleNameMapper: {
@@ -14,6 +16,7 @@ const config: Config.InitialOptions = {
     "\\.(css)$": "<rootDir>/tests/mockFile.ts",
   },
   collectCoverage: true,
+  coverageDirectory: "../coverage",
   collectCoverageFrom: [
     "src/**/*.{ts,tsx}",
     "!src/services/**",

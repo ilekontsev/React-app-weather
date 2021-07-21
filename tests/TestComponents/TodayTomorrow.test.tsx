@@ -61,9 +61,13 @@ describe("Today Tomorrow", () => {
     });
     test("flag today", () => {
       store.dispatch(actionSetFlagDay("/tomorrow"));
+      expect(reducer(initialState, actionSetFlagDay("/tomorrow"))).toEqual({
+        ...initialState,
+        checkFlagDay: "/tomorrow",
+      });
     });
   });
-  test("test on map", () => {
+  test("tests on map", () => {
     store.dispatch(actionSetFlagDay("/today"));
     store.dispatch(actionSetHourlyWeather(dataWeather, dataWeather));
     render(

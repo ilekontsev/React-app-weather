@@ -8,7 +8,7 @@ import {
   WEATHER_NOW,
   WEEK_WEATHER,
 } from "./ActionType";
-import { DescHourlyWeather } from "../Components/TodayTomorrow/TodayTomorrow";
+import { DescHourlyWeather } from "../interface/interface";
 
 export interface DescState {
   weatherNow: {

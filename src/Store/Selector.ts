@@ -1,5 +1,5 @@
 import { DescState } from "./Reducer";
-import { DescHourlyWeather } from "../Components/TodayTomorrow/TodayTomorrow";
+import { DescHourlyWeather } from "../interface/interface";
 
 const selectorWeatherNow = (state: DescState) => state?.weatherNow;
 const selectorTodayHourlyWeather = (state: DescState): DescHourlyWeather[] =>

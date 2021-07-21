@@ -7,21 +7,7 @@ import {
   selectorLong,
   selectorWeekWeather,
 } from "../../Store/Selector";
-
-interface DescWeek {
-  dt: number;
-  temp: {
-    day: number;
-  };
-  myDay: string;
-  myNumber: string;
-  myMonth: string;
-  weather: [
-    {
-      main: string;
-    }
-  ];
-}
+import { DescWeek } from "../../interface/interface";
 
 function WeekWeather() {
   const dispatch = useDispatch();

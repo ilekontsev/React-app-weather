@@ -7,17 +7,8 @@ import {
   effectGetWeather,
   effectGetWeekWeather,
 } from "../../Store/Effects";
-import { DescWeatherNow } from "../BannerWeather/BannerWeather";
+import { DescSavedCities, DescWeatherNow } from "../../interface/interface";
 import { actionSetLatAndLong } from "../../Store/Action";
-
-interface DescSavedCities {
-  name: string;
-  country: string;
-  coord: {
-    lon: string;
-    lat: string;
-  };
-}
 
 function SaveCity() {
   const dispatch = useDispatch();

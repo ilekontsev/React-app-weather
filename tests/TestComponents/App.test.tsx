@@ -20,16 +20,16 @@ const mockGeolocation = {
 global.navigator.geolocation = mockGeolocation;
 
 describe(">>>APP", () => {
-  test("handle click app test", () => {
+  test("handle click app tests", () => {
     render(
       <Provider store={store}>
         <App />
       </Provider>
     );
-    fireEvent.click(screen.getByTestId("block-test-app"), {
+    fireEvent.click(screen.getByTestId("block-tests-app"), {
       target: { className: "input-search-wrap" },
     });
-    fireEvent.click(screen.getByTestId("block-test-app"), {
+    fireEvent.click(screen.getByTestId("block-tests-app"), {
       target: { className: "class" },
     });
   });

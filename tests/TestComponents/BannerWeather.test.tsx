@@ -39,7 +39,7 @@ describe("testing banner", () => {
       </Provider>
     );
   });
-  test("test 1 render", () => {
+  test("tests 1 render", () => {
     const checkElement = document.querySelectorAll(
       ".bannerWeather-block-weather"
     );
@@ -47,11 +47,11 @@ describe("testing banner", () => {
   });
   test("click element", () => {
     store.dispatch(actionSetWeather(DataArr));
-    fireEvent.click(screen.getByTestId("block-test"));
+    fireEvent.click(screen.getByTestId("block-tests"));
   });
   test("check if", () => {
     store.dispatch(actionSetWeather(DataArr));
     store.dispatch(actionSetPreservedCity([{ name: "Maykop" }]));
-    fireEvent.click(screen.getByTestId("block-test"));
+    fireEvent.click(screen.getByTestId("block-tests"));
   });
 });
