@@ -8,41 +8,14 @@ import {
   actionSetLatAndLong,
   actionSetPreservedCity,
 } from "../../Store/Action";
-
-export interface DescWeatherNow {
-  weather: [
-    {
-      main: string;
-    }
-  ];
-  coord: {
-    lon: string;
-    lat: string;
-  };
-  main: {
-    temp: number;
-  };
-  name: string;
-  sys: {
-    country: string;
-  };
-  wind: {
-    speed: number;
-  };
-}
-interface DescPosition {
-  coords: {
-    latitude: number;
-    longitude: number;
-  };
-}
+import { DescPosition, DescWeatherNow } from "../../interface/interface";
 
 function BannerWeather() {
   const dispatch = useDispatch();
   // @ts-ignore
   const weatherNow: DescWeatherNow = useSelector(selectorWeatherNow);
-  // @ts-ignore
-  const savedCities: DescWeatherNow[] = useSelector(selectorSavedCities);
+  const savedCities = useSelector(selectorSavedCities);
+
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position: DescPosition) => {
@@ -58,11 +31,10 @@ function BannerWeather() {
   }, []);
 
   const saveCityInLocal = (upd: object) => {
-    const getCities = localStorage.getItem("cities");
-    if (getCities !== null) {
-      const citiesParse = JSON.parse(getCities);
-      console.log(citiesParse);
-      const citiesArr = citiesParse.concat(upd);
+    const getCities = JSON.parse(localStorage.getItem("cities") || "[]");
+
+    if (getCities?.length !== 0) {
+      const citiesArr = getCities.concat(upd);
       const cities = JSON.stringify(citiesArr);
       localStorage.setItem("cities", cities);
     } else {
@@ -71,9 +43,8 @@ function BannerWeather() {
     }
   };
 
-  const saveCity = async () => {
+  const saveCity = () => {
     const checkedMatch = savedCities.some(
-      // @ts-ignore
       (item) => item?.name === weatherNow?.name
     );
     if (!checkedMatch) {
@@ -82,7 +53,7 @@ function BannerWeather() {
         country: weatherNow.sys.country,
         coord: weatherNow.coord,
       };
-      await dispatch(actionSetPreservedCity([upd]));
+      dispatch(actionSetPreservedCity([upd]));
       saveCityInLocal(upd);
     }
   };
@@ -96,7 +67,7 @@ function BannerWeather() {
                 {Math.round(weatherNow.main.temp)} &deg;C
               </p>
               <p className="bannerWeather-info-city">
-                {weatherNow.name}, {weatherNow.sys.country}
+                {weatherNow.name}, {weatherNow.sys?.country}
               </p>
               <p className="bannerWeather-info-sky">
                 {weatherNow.weather[0].main}
@@ -108,7 +79,10 @@ function BannerWeather() {
           )}
         </div>
         <div className="bannerWeather-button-save">
-          <AddCircleOutlineIcon onClick={saveCity} />
+          <AddCircleOutlineIcon
+            data-testid={"block-tests"}
+            onClick={saveCity}
+          />
         </div>
       </div>
     </div>

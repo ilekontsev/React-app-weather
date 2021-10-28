@@ -12,27 +12,29 @@ import {
   actionSetPreservedCity,
 } from "../../Store/Action";
 
-function App() {
+const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const getCities = localStorage.getItem("cities");
-    // @ts-ignore
-    const cities = JSON.parse(getCities);
-    if (cities?.length !== 0 && cities !== null) {
-      // @ts-ignore
+    const cities = JSON.parse(localStorage.getItem("cities") || "[]");
+    if (cities?.length !== 0) {
       dispatch(actionSetPreservedCity(cities));
     }
   }, []);
 
-  const hiddenSearch = (e: any) => {
-    if (e.target.className !== "input-search-wrap") {
+  const hiddenSearch = (e: React.MouseEvent) => {
+    const target = e.target as Element;
+    if (target.className !== "input-search-wrap") {
       dispatch(actionSearchOfferVariant([]));
     }
   };
   return (
     <BrowserRouter>
-      <div className={"root-wrap-app"} onClick={hiddenSearch}>
+      <div
+        data-testid={"block-tests-app"}
+        className={"root-wrap-app"}
+        onClick={hiddenSearch}
+      >
         <Header />
         <BannerWeather />
         <Switch>
@@ -44,6 +46,6 @@ function App() {
       </div>
     </BrowserRouter>
   );
-}
+};
 
 export default App;

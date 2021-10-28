@@ -10,42 +10,21 @@ import {
   selectorTomorrowHourlyWeather,
 } from "../../Store/Selector";
 import Ymap from "../Ymap/Ymap";
-
-interface DescHourlyWeather {
-  main: {
-    temp: number;
-  };
-  myDay: string;
-  myTime: string;
-  myMonth: string;
-  myNumber: string;
-  weather: [
-    {
-      main: string;
-    }
-  ];
-  wind: {
-    speed: number;
-  };
-}
+import { DescHourlyWeather } from "../../interface/interface";
 
 function TodayTomorrow() {
   const dispatch = useDispatch();
-  // @ts-ignore
   const lat: string = useSelector(selectorLat);
-  // @ts-ignore
   const long: string = useSelector(selectorLong);
+  const checkFlagDay: string = useSelector(selectorCheckFlagDay);
 
   const todayHourlyWeather: DescHourlyWeather[] = useSelector(
-    // @ts-ignore
     selectorTodayHourlyWeather
   );
+
   const tomorrowHourlyWeather: DescHourlyWeather[] = useSelector(
-    // @ts-ignore
     selectorTomorrowHourlyWeather
   );
-  // @ts-ignore
-  const checkFlagDay: string = useSelector(selectorCheckFlagDay);
 
   if (todayHourlyWeather?.length === 0) {
     dispatch(effectGetHourlyWeather(lat, long));
@@ -57,6 +36,8 @@ function TodayTomorrow() {
         return todayHourlyWeather;
       case "/tomorrow":
         return tomorrowHourlyWeather;
+      default:
+        return todayHourlyWeather;
     }
   };
   const checkedDay = checkFlag();
@@ -67,22 +48,9 @@ function TodayTomorrow() {
         {todayHourlyWeather?.length && (
           <div className="tt-contain">
             <div className="tt-header">
-              <p className="tt-header-h1">
-                {
-                  // @ts-ignore
-                  checkedDay[0]?.myDay
-                }
-              </p>
+              <p className="tt-header-h1">{checkedDay[0]?.myDay}</p>
               <p className="tt-header-h3-data">
-                {
-                  // @ts-ignore
-                  checkedDay[0]?.myMonth
-                }
-                ,{" "}
-                {
-                  // @ts-ignore
-                  checkedDay[0]?.myNumber
-                }
+                {checkedDay[0]?.myMonth}, {checkedDay[0]?.myNumber}
               </p>
             </div>
 
@@ -94,17 +62,14 @@ function TodayTomorrow() {
                 </tr>
               </thead>
               <tbody>
-                {
-                  // @ts-ignore
-                  checkFlag().map((item, index) => (
-                    <tr key={index}>
-                      <td>{item.myTime}</td>
-                      <td>{Math.round(item.main.temp)} &deg;C</td>
-                      <td>{item.weather[0].main}</td>
-                      <td>Wind - {item.wind.speed} meters per second</td>
-                    </tr>
-                  ))
-                }
+                {checkFlag().map((item, index) => (
+                  <tr key={index}>
+                    <td>{item.myTime}</td>
+                    <td>{Math.round(item.main.temp)} &deg;C</td>
+                    <td>{item.weather[0].main}</td>
+                    <td>Wind - {item.wind.speed} meters per second</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>

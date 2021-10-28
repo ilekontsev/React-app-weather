@@ -1,7 +1,8 @@
 {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "jest": true
     },
     "extends": [
         "plugin:react/recommended",
@@ -21,11 +22,11 @@
         "@typescript-eslint",
         "prettier"
     ],
+
     "rules": {
         "no-use-before-define": "off",
         "@typescript-eslint/no-use-before-define": ["error"],
         "prettier/prettier": "error",
         "no-unused-vars": "off"
-
     }
 }

@@ -2,22 +2,13 @@ import React from "react";
 import "./SaveCity.css";
 import { useDispatch, useSelector } from "react-redux";
 import { selectorSavedCities, selectorWeatherNow } from "../../Store/Selector";
-import InputSearch from "../InputSearch/InputSearch";
 import {
   effectGetHourlyWeather,
   effectGetWeather,
   effectGetWeekWeather,
 } from "../../Store/Effects";
-import { DescWeatherNow } from "../BannerWeather/BannerWeather";
-
-interface DescSavedCities {
-  name: string;
-  country: string;
-  coord: {
-    lon: string;
-    lat: string;
-  };
-}
+import { DescSavedCities, DescWeatherNow } from "../../interface/interface";
+import { actionSetLatAndLong } from "../../Store/Action";
 
 function SaveCity() {
   const dispatch = useDispatch();
@@ -25,8 +16,10 @@ function SaveCity() {
   const savedCities: DescSavedCities[] = useSelector(selectorSavedCities);
   // @ts-ignore
   const weatherNow: DescWeatherNow = useSelector(selectorWeatherNow);
-  const displayingThisCity = (e: any) => {
-    const nameCity = e.target.innerText.split(",")[0];
+
+  const selectThisCity = (e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+    const nameCity = target.innerText.split(",")[0];
     if (weatherNow.name !== nameCity) {
       // eslint-disable-next-line array-callback-return
       const findCity = savedCities.filter((item) => {
@@ -35,8 +28,10 @@ function SaveCity() {
         }
       });
       const { lon, lat } = findCity[0].coord;
+
       localStorage.setItem("latitude", lat);
       localStorage.setItem("longitude", lon);
+      dispatch(actionSetLatAndLong(lat, lon));
       dispatch(effectGetWeather(lat, lon));
       dispatch(effectGetHourlyWeather(lat, lon));
       dispatch(effectGetWeekWeather(lat, lon));
@@ -52,8 +47,9 @@ function SaveCity() {
               {savedCities.map((item, index) => (
                 <div
                   key={index}
+                  data-testid="block-test"
                   className="saveCity-block"
-                  onClick={displayingThisCity}
+                  onClick={selectThisCity}
                 >
                   <p>
                     {item?.name}, {item?.country}

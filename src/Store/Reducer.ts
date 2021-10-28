@@ -8,13 +8,14 @@ import {
   WEATHER_NOW,
   WEEK_WEATHER,
 } from "./ActionType";
+import { DescHourlyWeather } from "../interface/interface";
 
 export interface DescState {
   weatherNow: {
     name: string;
   };
-  todayHourlyWeather: object[];
-  tomorrowHourlyWeather: object[];
+  todayHourlyWeather: DescHourlyWeather[];
+  tomorrowHourlyWeather: DescHourlyWeather[];
   checkFlagDay: string;
   savedCities: [
     {
@@ -28,7 +29,7 @@ export interface DescState {
   long: string;
 }
 
-const initialState = {
+export const initialState = {
   weatherNow: {},
   todayHourlyWeather: [],
   tomorrowHourlyWeather: [],
@@ -70,7 +71,6 @@ function reducer(state = initialState, action: any) {
     case SAVED_CITIES:
       return {
         ...state,
-        // @ts-ignore
         savedCities: state.savedCities.concat(action.payload.upd),
       };
     case WEEK_WEATHER:
